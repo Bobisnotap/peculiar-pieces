@@ -7,12 +7,15 @@ import amymialee.peculiarpieces.callbacks.PlayerJumpConsumingBlock;
 import amymialee.peculiarpieces.effects.FlightStatusEffect;
 import amymialee.peculiarpieces.effects.OpenStatusEffect;
 import amymialee.peculiarpieces.registry.PeculiarBlocks;
+import amymialee.peculiarpieces.registry.PeculiarEntities;
 import amymialee.peculiarpieces.registry.PeculiarItems;
 import amymialee.peculiarpieces.screens.FishTankScreenHandler;
 import amymialee.peculiarpieces.screens.PackedPouchScreenHandler;
+import amymialee.peculiarpieces.screens.PedestalScreenHandler;
 import amymialee.peculiarpieces.screens.PotionPadScreenHandler;
 import amymialee.peculiarpieces.screens.WarpScreenHandler;
 import amymialee.peculiarpieces.util.ExtraPlayerDataWrapper;
+import amymialee.peculiarpieces.util.RedstoneManager;
 import amymialee.peculiarpieces.util.WarpManager;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
@@ -48,12 +51,12 @@ import net.minecraft.world.GameRules;
 import java.util.Collection;
 import java.util.Random;
 
-@SuppressWarnings({"UnusedReturnValue", "SameParameterValue", "unused"})
+@SuppressWarnings("unused")
 public class PeculiarPieces implements ModInitializer {
     public static final String MOD_ID = "peculiarpieces";
     public static final Random RANDOM = new Random();
     //ItemGroups
-    public static final ItemGroup PIECES_GROUP = FabricItemGroupBuilder.create(id("peculiarpieces_group")).icon(() -> PeculiarItems.getRecipeKindIcon(PeculiarItems.MOD_ITEMS)).build();
+    public static final ItemGroup PIECES_GROUP = FabricItemGroupBuilder.create(id("peculiarpieces_group")).icon(PeculiarItems::getPeculiarIcon).build();
     public static final ItemGroup CREATIVE_GROUP = FabricItemGroupBuilder.create(id("peculiarpieces_creative_group")).icon(PeculiarItems::getCreativeIcon).build();
     public static final ItemGroup POTION_GROUP = FabricItemGroupBuilder.create(id("peculiarpieces_potion_group")).icon(PeculiarItems::getPotionIcon).build();
     //ScreenHandlers
@@ -61,6 +64,7 @@ public class PeculiarPieces implements ModInitializer {
     public static final ScreenHandlerType<PotionPadScreenHandler> POTION_PAD_SCREEN_HANDLER = Registry.register(Registry.SCREEN_HANDLER, "potion_pad", new ScreenHandlerType<>(PotionPadScreenHandler::new));
     public static final ScreenHandlerType<FishTankScreenHandler> FISH_TANK_SCREEN_HANDLER = Registry.register(Registry.SCREEN_HANDLER, "fish_tank", new ScreenHandlerType<>(FishTankScreenHandler::new));
     public static final ScreenHandlerType<PackedPouchScreenHandler> BUSTLING_SCREEN_HANDLER = Registry.register(Registry.SCREEN_HANDLER, "bustling_bundle", new ScreenHandlerType<>((a, b) -> new PackedPouchScreenHandler(a, b, PeculiarItems.PACKED_POUCH.getDefaultStack().copy())));
+    public static final ScreenHandlerType<PedestalScreenHandler> PEDESTAL_SCREEN_HANDLER = Registry.register(Registry.SCREEN_HANDLER, "pedestal", new ScreenHandlerType<>(PedestalScreenHandler::new));
     //Tags
     public static final TagKey<EntityType<?>> MOUNT_BLACKLIST = TagKey.of(Registry.ENTITY_TYPE_KEY, id("mount_blacklist"));
     public static final TagKey<EntityType<?>> UNGRABBABLE = TagKey.of(Registry.ENTITY_TYPE_KEY, id("ungrabbable"));
@@ -91,6 +95,7 @@ public class PeculiarPieces implements ModInitializer {
     public void onInitialize() {
         PeculiarItems.init();
         PeculiarBlocks.init();
+        PeculiarEntities.init();
         CommandRegistrationCallback.EVENT.register((dispatcher, access, environment) -> dispatcher.register(
                 literal("peculiar")
                         .then(literal("checkpoint"))
@@ -111,6 +116,7 @@ public class PeculiarPieces implements ModInitializer {
                                             return 0;
                                         })))));
         ServerTickEvents.END_WORLD_TICK.register(serverWorld -> WarpManager.tick());
+        ServerTickEvents.END_WORLD_TICK.register(serverWorld -> RedstoneManager.tick());
         PlayerCrouchCallback.EVENT.register((player, world) -> {
             BlockPos pos = player.getBlockPos().add(0, -1, 0);
             BlockState state = world.getBlockState(pos);

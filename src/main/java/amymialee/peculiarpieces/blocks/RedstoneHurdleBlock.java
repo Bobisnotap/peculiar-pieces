@@ -16,7 +16,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
-@SuppressWarnings("deprecation")
 public class RedstoneHurdleBlock extends AbstractRedstoneComparisonBlock {
     public static final IntProperty HURDLE = IntProperty.of("hurdle", 0, 15);
 
@@ -47,6 +46,6 @@ public class RedstoneHurdleBlock extends AbstractRedstoneComparisonBlock {
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(FACING, HURDLE, POWERED);
+        builder.add(FACING, POWERED, HURDLE);
     }
 }

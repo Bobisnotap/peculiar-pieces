@@ -4,6 +4,7 @@
   "package": "amymialee.peculiarpieces.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "ArrowEntityAccessor",
     "BeaconBlockMixin",
     "BoatEntityMixin",
     "BrewingRecipeRegistryMixin",
@@ -11,6 +12,7 @@
     "CapeFeatureRendererMixin",
     "ClientPlayNetworkHandlerMixin",
     "CreeperEntityMixin",
+    "EndermanEntityMixin",
     "EntityAccessor",
     "EntityBucketItemAccessor",
     "EntityMixin",
@@ -19,6 +21,8 @@
     "ItemStackMixin",
     "LivingEntityMixin",
     "LivingEntityRendererMixin",
+    "MobEntityMixin",
+    "PersistentProjectileEntityMixin",
     "PlayerEntityMixin",
     "PlayerEntityModelMixin",
     "PlayerEntityRendererMixin",
@@ -29,7 +33,8 @@
     "ShearsItemMixin",
     "SheepEntityMixin",
     "SlimeEntityMixin",
-    "StatusEffectInstanceAccessor"
+    "StatusEffectInstanceAccessor",
+    "WorldMixin"
   ],
   "injectors": {
     "defaultRequire": 1

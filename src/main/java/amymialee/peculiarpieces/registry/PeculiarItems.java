@@ -3,6 +3,7 @@ package amymialee.peculiarpieces.registry;
 import amymialee.peculiarpieces.PeculiarPieces;
 import amymialee.peculiarpieces.items.*;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionUtil;
@@ -30,6 +31,14 @@ public class PeculiarItems {
     public static final Item TOKEN_OF_UNDYING = registerItem("token_of_undying", MOD_ITEMS, new DispensableTrinketItem(new FabricItemSettings().maxCount(1).rarity(Rarity.UNCOMMON).group(PeculiarPieces.PIECES_GROUP)));
     public static final Item EVERLASTING_EMBLEM = registerItem("everlasting_emblem", MOD_ITEMS, new EverlastingEmblemItem(new FabricItemSettings().maxCount(1).rarity(Rarity.EPIC).group(PeculiarPieces.PIECES_GROUP)));
     public static final Item MOUNTING_STICK = registerItem("mounting_stick", MOD_ITEMS, new MountingStickItem(new FabricItemSettings().maxCount(1).rarity(Rarity.UNCOMMON).group(PeculiarPieces.PIECES_GROUP)));
+    public static final Item BOTTOMLESS_BUCKET = registerItem("bottomless_bucket", MOD_ITEMS, new BottomlessBucketItem(Fluids.EMPTY, new FabricItemSettings().maxCount(1).rarity(Rarity.RARE).group(PeculiarPieces.PIECES_GROUP)));
+    public static final Item BOTTOMLESS_WATER_BUCKET = registerItem("bottomless_water_bucket", MOD_ITEMS, new BottomlessBucketItem(Fluids.WATER, new FabricItemSettings().maxCount(1).rarity(Rarity.RARE).group(PeculiarPieces.PIECES_GROUP)));
+    public static final Item BOTTOMLESS_LAVA_BUCKET = registerItem("bottomless_lava_bucket", MOD_ITEMS, new BottomlessBucketItem(Fluids.LAVA, new FabricItemSettings().maxCount(1).rarity(Rarity.RARE).group(PeculiarPieces.PIECES_GROUP)));
+    public static final Item BOTTOMLESS_MILK_BUCKET = registerItem("bottomless_milk_bucket", MOD_ITEMS, new BottomlessMilkBucketItem(new FabricItemSettings().maxCount(1).rarity(Rarity.RARE).group(PeculiarPieces.PIECES_GROUP)));
+    public static final Item PLAYER_COMPASS = registerItem("player_compass", MOD_ITEMS, new PlayerCompassItem(new FabricItemSettings().maxCount(1).rarity(Rarity.RARE).group(PeculiarPieces.PIECES_GROUP)));
+    public static final Item REDSTONE_ACTIVATOR = registerItem("redstone_activator", MOD_ITEMS, new RedstoneActivatorItem(new FabricItemSettings().maxCount(1).rarity(Rarity.RARE).group(PeculiarPieces.PIECES_GROUP)));
+    public static final Item REACHING_REMOTE = registerItem("reaching_remote", MOD_ITEMS, new ReachingRemoteItem(new FabricItemSettings().maxCount(1).rarity(Rarity.RARE).group(PeculiarPieces.PIECES_GROUP)));
+    public static final Item REDSTONE_REMOTE = registerItem("redstone_remote", MOD_ITEMS, new RedstoneRemoteItem(new FabricItemSettings().maxCount(1).rarity(Rarity.RARE).group(PeculiarPieces.PIECES_GROUP)));
     public static final Item FLIGHT_RING = registerItem("flight_ring", MOD_ITEMS, new FlightRingItem(new FabricItemSettings().maxCount(1).rarity(Rarity.RARE).group(PeculiarPieces.PIECES_GROUP)));
     //Shoes
     public static final Item SLIPPERY_SHOES = registerItem("slippery_shoes", MOD_ITEMS, new DispensableTrinketItem(new FabricItemSettings().maxCount(1).rarity(Rarity.RARE).group(PeculiarPieces.PIECES_GROUP)));
@@ -37,7 +46,8 @@ public class PeculiarItems {
     public static final Item BOUNCY_BOOTS = registerItem("bouncy_boots", MOD_ITEMS, new DispensableTrinketItem(new FabricItemSettings().maxCount(1).rarity(Rarity.RARE).group(PeculiarPieces.PIECES_GROUP)));
     public static final Item STEADY_SNEAKERS = registerItem("steady_sneakers", MOD_ITEMS, new DispensableTrinketItem(new FabricItemSettings().maxCount(1).rarity(Rarity.RARE).group(PeculiarPieces.PIECES_GROUP)));
     //Pearls
-    public static final Item CONSUMABLE_POS_PEARL = registerItem("consumable_position_pearl", MOD_ITEMS, new ConsumablePositionPearlItem(new FabricItemSettings().rarity(Rarity.UNCOMMON).group(PeculiarPieces.PIECES_GROUP)));
+    public static final Item POS_PAPER = registerItem("position_paper", MOD_ITEMS, new PositionPaperItem(new FabricItemSettings().rarity(Rarity.UNCOMMON).group(PeculiarPieces.PIECES_GROUP)));
+    public static final Item POS_TRAP = registerItem("position_trap", MOD_ITEMS, new PositionTrapItem(new FabricItemSettings().rarity(Rarity.UNCOMMON).group(PeculiarPieces.PIECES_GROUP)));
     public static final Item POS_PEARL = registerItem("position_pearl", MOD_ITEMS, new PositionPearlItem(new FabricItemSettings().maxCount(1).rarity(Rarity.RARE).group(PeculiarPieces.PIECES_GROUP)));
     public static final Item TRANS_PEARL = registerItem("transport_pearl", MOD_ITEMS, new TransportPearlItem(new FabricItemSettings().maxCount(1).rarity(Rarity.RARE).group(PeculiarPieces.PIECES_GROUP)));
     public static final Item SPAWNPOINT_PEARL = registerItem("spawnpoint_pearl", MOD_ITEMS, new SpawnpointPearlItem(new FabricItemSettings().maxCount(1).rarity(Rarity.RARE).group(PeculiarPieces.PIECES_GROUP)));
@@ -55,11 +65,8 @@ public class PeculiarItems {
         return item;
     }
 
-    public static ItemStack getRecipeKindIcon(ArrayList<Item> arrayList) {
-        if (arrayList.size() == 1) {
-            return arrayList.get(0).getDefaultStack();
-        }
-        return arrayList.get(PeculiarPieces.RANDOM.nextInt(arrayList.size() - 1)).getDefaultStack();
+    public static ItemStack getPeculiarIcon() {
+        return PeculiarItems.PECULIAR_BOOK.getDefaultStack();
     }
 
     public static ItemStack getCreativeIcon() {

@@ -16,7 +16,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
-@SuppressWarnings("deprecation")
 public class RedstoneStaticBlock extends AbstractRedstoneComparisonBlock {
     public static final IntProperty STATIC = IntProperty.of("static", 0, 15);
 
@@ -43,6 +42,6 @@ public class RedstoneStaticBlock extends AbstractRedstoneComparisonBlock {
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(FACING, STATIC, POWERED);
+        builder.add(FACING, POWERED, STATIC);
     }
 }

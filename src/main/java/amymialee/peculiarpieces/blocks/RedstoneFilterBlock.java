@@ -16,7 +16,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
-@SuppressWarnings("deprecation")
 public class RedstoneFilterBlock extends AbstractRedstoneComparisonBlock {
     public static final IntProperty FILTER = IntProperty.of("filter", 0, 15);
 
@@ -47,6 +46,6 @@ public class RedstoneFilterBlock extends AbstractRedstoneComparisonBlock {
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(FACING, FILTER, POWERED);
+        builder.add(FACING, POWERED, FILTER);
     }
 }
