@@ -21,6 +21,9 @@
     ],
     "main": [
       "amymialee.peculiarpieces.PeculiarPieces"
+    ],
+    "cardinal-components": [
+      "amymialee.peculiarpieces.cca.PeculiarChunkComponents"
     ]
   },
   "mixins": [
@@ -38,6 +41,9 @@
       "links": {
         "modmenu.discord": "https://discord.gg/P4dUsxv6An"
       }
-    }
+    },
+    "cardinal-components": [
+      "peculiarpieces:redstone"
+    ]
   }
 }

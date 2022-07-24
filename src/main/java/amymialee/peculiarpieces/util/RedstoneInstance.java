@@ -1,9 +1,16 @@
 package amymialee.peculiarpieces.util;
 
+import net.minecraft.world.World;
+
 public class RedstoneInstance {
+    private final World world;
     private boolean strong = false;
     private int lifetime = 20;
     private int power = 15;
+
+    public RedstoneInstance(World world) {
+        this.world = world;
+    }
 
     public RedstoneInstance setLifetime(int lifetime) {
         this.lifetime = lifetime;
@@ -40,5 +47,19 @@ public class RedstoneInstance {
 
     public boolean isStrong() {
         return strong;
+    }
+
+    public World getWorld() {
+        return world;
+    }
+
+    @Override
+    public String toString() {
+        return "RedstoneInstance{" +
+                "world=" + world +
+                ", strong=" + strong +
+                ", lifetime=" + lifetime +
+                ", power=" + power +
+                '}';
     }
 }

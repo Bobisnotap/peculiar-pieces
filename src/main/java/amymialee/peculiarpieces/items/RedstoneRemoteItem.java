@@ -1,7 +1,7 @@
 package amymialee.peculiarpieces.items;
 
+import amymialee.peculiarpieces.cca.PeculiarChunkComponents;
 import amymialee.peculiarpieces.util.RedstoneInstance;
-import amymialee.peculiarpieces.util.RedstoneManager;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.DyeableItem;
@@ -42,7 +42,7 @@ public class RedstoneRemoteItem extends Item implements DyeableItem {
         BlockPos pos = readTarget(stack);
         if (pos.getSquaredDistance(0, 0, 0) > 1) {
             if (!world.isClient && !pos.equals(BlockPos.ORIGIN)) {
-                RedstoneManager.addInstance(world, pos, new RedstoneInstance());
+                PeculiarChunkComponents.REDSTONE.maybeGet(world.getWorldChunk(pos)).ifPresent((manager) -> manager.addInstance(pos, new RedstoneInstance(world)));
             }
             user.getItemCooldownManager().set(this, 1);
         }
